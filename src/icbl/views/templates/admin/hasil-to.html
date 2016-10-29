@@ -1,0 +1,67 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        var jsoal={{mdata.jsoal}};
+        var kunci='{{kunci}}';
+        function convert(nilai){
+           var snilai="";
+           var lnilai=nilai.length;
+           if (lnilai <= 2){
+               snilai=nilai+",00";
+           }else{
+             if (lnilai == 3){
+                snilai = nilai.substring(0,1)+","+nilai.substring(2,3)+"0";
+             }else{
+                snilai = nilai.substring(0,1)+","+nilai.substring(2,(nilai.length));
+             }
+           }
+           return snilai;
+        }
+    </script>
+
+    <h2 align="center">HASIL TO</h2>
+    <h3 align="center">{{mdata.pelajaran}} - {{mdata.keterangan}} - kode {{mdata.kodesoal}} </h3>
+    <form method="POST" action="/to-detail-siswa">
+    <table border="1" align="center" style="font-size: x-small" name="hasilTo" id="hasilTo">
+
+        <tr><td rowspan="3" align="center">NIS</td><td rowspan="3" align="center">NAMA</td>
+            <script>
+                document.write('<td align="center" colspan="'+jsoal+'">KUNCI</td>');
+            </script>
+            <td rowspan="3">NILAI</td></tr>
+        <tr>
+            <script>
+                for(i=1;i<=jsoal;i++){
+                    document.write('<td align="center">'+i+'</td>');
+                }
+            </script>
+        </tr>
+        <tr>
+            <script>
+                for(i=0;i<jsoal;i++){
+                    document.write('<td align="center">'+kunci.substring(i,i+1)+'</td>');
+                }
+            </script>
+        </tr>
+
+        {% for datum in data %}
+        <tr>
+            <td><input type="submit" name="nis" value="{{datum.nis}}" /></td>
+            <td>{{datum.nama}}</td>
+            <script>
+                var jwb='{{datum.jawaban}}';
+                for(i=0;i<jsoal;i++){
+                  document.write('<td align="center">'+jwb.substring(i,i+1)+'</td>');
+                }
+            </script>
+            <td><script>document.write(convert('{{datum.nilai}}'))</script></td>
+            <!--<td>{{datum.nilai}}</td>
+              -->
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="hidden" name="kodesoal" value="{{mdata.kodesoal}}" />
+    </form>
+
+{% endblock %}

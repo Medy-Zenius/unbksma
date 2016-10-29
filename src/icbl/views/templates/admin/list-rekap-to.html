@@ -1,0 +1,26 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        var vno=1;
+    </script>
+    <h2 align="center">Rekapitulasi Hasil SET TO UN</h2>
+    <h3 align="center">Matematika ({{kmat}})</h3>
+    <h3 align="center">IPA ({{kipa}})</h3>
+    <h3 align="center">Bahasa Indonesia ({{kind}})</h3>
+    <h3 align="center">Bahasa Inggris ({{king}})</h3>
+    <h3 id="coba"></h3>
+    <table border="1" align="center">
+        <tr><td>NO</td><td>NIS</td><td>NAMA</td><td>MAT</td><td>IPA</td><td>IND</td><td>ING</td><td>Total</td></tr>
+        {% for rek in rekap %}
+        <tr>
+            <td><script>document.write(vno);</script></td>
+            {% for r in rek %}
+                <td>{{r}}</td>
+            {% endfor %}
+        </tr>
+        <script>vno+=1</script>
+        {% endfor %}
+
+    </table>
+{% endblock %}

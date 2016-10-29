@@ -1,0 +1,24 @@
+
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        function kirim(){
+            document.pf.pass.value=document.getElementById('login_password').value;
+            document.getElementById("pf").submit();
+        }
+    </script>
+    <div class="container-fluid">
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" id="login_password">
+        </div>
+        <button type="button" class="btn btn-primary" onClick="kirim()">Masuk</button>
+        <div>{{error}}</div>
+    </div>
+    <form method="POST" action="/admin-login" name="pf" id="pf">
+        <input type="hidden" name="pass">
+    </form>
+{% endblock %}
+
+

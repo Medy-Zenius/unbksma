@@ -1,0 +1,76 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        var jsoal={{mdata.jsoal}};
+        var kunci='{{kunci}}';
+
+        var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+        , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name, filename) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+            document.getElementById("dlink").href = uri + base64(format(template, ctx));
+            document.getElementById("dlink").download = filename;
+            document.getElementById("dlink").click();
+
+        }
+    })()
+    </script>
+    <a id="dlink"  style="display:none;"></a>
+    <div align="center">
+        <input type="button" onclick="tableToExcel('hasilTo', 'hasilTo', 'TO-{{mdata.pelajaran}}-{{mdata.keterangan}}-kode {{mdata.kodesoal}}.xls')" value="Simpan ke Excel">
+    <div>
+
+    <table border="1" align="center" style="font-size: x-small" name="hasilTo" id="hasilTo">
+        <tr>
+           <script>
+                document.write('<td align="center" colspan="'+(jsoal+3)+'">HASIL TO</td>');
+            </script>
+        </tr>
+        <tr>
+           <script>
+                document.write('<td align="center" colspan="'+(jsoal+3)+'">{{mdata.pelajaran}} - {{mdata.keterangan}} - kode {{mdata.kodesoal}}</td>');
+            </script>
+        </tr>
+        <tr><td rowspan="3" align="center">NIS</td><td rowspan="3" align="center">NAMA</td>
+            <script>
+                document.write('<td align="center" colspan="'+jsoal+'">KUNCI</td>');
+            </script>
+            <td rowspan="3">NILAI</td></tr>
+        <tr>
+            <script>
+                for(i=1;i<=jsoal;i++){
+                    document.write('<td align="center">'+i+'</td>');
+                }
+            </script>
+        </tr>
+        <tr>
+            <script>
+                for(i=0;i<jsoal;i++){
+                    document.write('<td align="center">'+kunci.substring(i,i+1)+'</td>');
+                }
+            </script>
+        </tr>
+
+        {% for datum in data %}
+        <tr>
+            <td>{{datum.nis}}</td>
+            <td>{{datum.nama}}</td>
+            <script>
+                var jwb='{{datum.jawaban}}';
+                for(i=0;i<jsoal;i++){
+                  document.write('<td align="center">'+jwb.substring(i,i+1)+'</td>');
+                }
+            </script>
+            <td>{{datum.nilai}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

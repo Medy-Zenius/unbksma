@@ -1,0 +1,21 @@
+{% extends "icbl/views/templates/home/base.html" %}
+
+{% block content %}
+<script>
+  function kirim(vform){
+    document.getElementById(vform).submit();
+  }
+</script>
+
+<form method="POST" id="pf" name="pf" action="/home-no-lstore">
+</form>
+<form method="POST" id="pf1" name="pf1" action="/home-lstore">
+</form>
+<script>
+    if (localStorage.id && localStorage.kat && localStorage.nis && localStorage.ns && localStorage.jsoal && localStorage.jwaktu && localStorage.kode && localStorage.jwb && localStorage.kodesoal) {
+         kirim("pf1");
+} else {
+         kirim("pf");
+}
+</script>
+{% endblock %}

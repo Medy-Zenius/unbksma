@@ -1,0 +1,18 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <h2 align="center">LIHAT TO</h2>
+    <h3 align="center">Klik kode untuk melihat hasil TO!</h3>
+    <form method="POST" action="{{action}}">
+    <table border="1" align="center">
+        <tr><td>KODE</td><td>Pelajaran</td><td>Paket</td></tr>
+        {% for datum in data %}
+        <tr>
+            <td><input type="submit" name="kodesoal" value="{{datum.kodesoal}}" /></td>
+            <td>{{datum.pelajaran}}</td>
+            <td>{{datum.keterangan}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+{% endblock %}

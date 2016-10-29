@@ -1,0 +1,18 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <h2 align="center">DAFTAR GURU</h2>
+    <h3 align="center">Klik ID untuk mengedit data guru!</h3>
+    <form method="POST" action="/edit-guru">
+    <table border="1" align="center">
+        <tr><td>NAMA</td><td>ID</td><td>Password</td></tr>
+        {% for datum in data %}
+        <tr>
+            <td><input type="submit" name="id" value="{{datum.id}}" /></td>
+            <td>{{datum.nama}}</td>
+            <td>{{datum.pass}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+{% endblock %}

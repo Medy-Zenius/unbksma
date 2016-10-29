@@ -1,0 +1,45 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        var vno=1;
+        var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+        , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+        , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name, filename) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+            document.getElementById("dlink").href = uri + base64(format(template, ctx));
+            document.getElementById("dlink").download = filename;
+            document.getElementById("dlink").click();
+
+            }
+        })()
+    </script>
+    <a id="dlink"  style="display:none;"></a>
+    <div align="center">
+        <input type="button" onclick="tableToExcel('rek', 'rek', 'REKAP-Mat {{kmat}}-IPA {{kipa}}-IND {{kind}}-ING {{king}}.xls')" value="Export to Excel">
+    <div>
+
+    <table border="1" align="center" name="rek" id="rek">
+        <tr><td colspan="8">Rekapitulasi Hasil SET TO UN</td></tr>
+        <tr><td colspan="8">Matematika ({{kmat}})</td></tr>
+        <tr><td colspan="8">IPA ({{kipa}})</td></tr>
+        <tr><td colspan="8">Bahasa Indonesia ({{kind}})</td></tr>
+        <tr><td colspan="8">Bahasa Inggris ({{king}})</td></tr>
+        <tr><td>NO</td><td>NIS</td><td>NAMA</td><td>MAT</td><td>IPA</td><td>IND</td><td>ING</td><td>Total</td></tr>
+        {% for rek in rekap %}
+        <tr>
+            <td><script>document.write(vno);</script></td>
+            {% for r in rek %}
+                <td>{{r}}</td>
+            {% endfor %}
+        </tr>
+        <script>vno+=1</script>
+        {% endfor %}
+
+    </table>
+{% endblock %}

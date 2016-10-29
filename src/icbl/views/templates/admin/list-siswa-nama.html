@@ -1,0 +1,18 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <h2 align="center">EDIT SISWA</h2>
+    <h3 align="center">Klik NIS untuk menyunting data siswa!</h3>
+    <form method="POST" action="/do-edit-siswa">
+    <table border="1" align="center">
+        <tr><td>NIS</td><td>NAMA</td><td>KELAS</td></tr>
+        {% for datum in data %}
+        <tr>
+            <td><input type="submit" name="nis" value="{{datum.nis}}" /></td>
+            <td>{{datum.nama}}</td>
+            <td>{{datum.kelas}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+{% endblock %}

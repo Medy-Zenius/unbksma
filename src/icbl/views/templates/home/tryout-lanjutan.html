@@ -1,0 +1,337 @@
+{% extends "icbl/views/templates/home/base.html" %}
+
+{% block content %}
+
+<script>
+    var vid=localStorage.id;
+    var vkat=localStorage.kat;
+    var vnis=localStorage.nis;
+    var ns=JSON.parse(localStorage.ns);
+    var nj=JSON.parse(localStorage.nj);
+    var nu=JSON.parse(localStorage.nu);
+    var no=1;
+    var jsoal=Number(localStorage.jsoal);
+    var jwaktu=Number(localStorage.jwaktu);
+    var kode=localStorage.kode;
+    var jwb =JSON.parse(localStorage.jwb);
+    if (jwaktu < 10){
+        jwaktu=10;
+    }
+
+    function save_ls(){
+       localStorage.jwaktu=jwaktu;
+       localStorage.jwb=JSON.stringify(jwb);
+    }
+
+    function wDOM(id,cnt){
+        document.getElementById(id).innerHTML=cnt;
+    }
+
+    function func(jw){
+        var vno=no-1;
+        var so="o"+vno;
+        var cnt=no+" ("+jw+")";
+        wDOM(so,cnt);
+        wDOM("jsn"+vno,jw);
+        jwb[vno]=jw;
+        save_ls();
+    }
+
+    function get_resp(urla,funct)
+            {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+              {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+              }
+            else
+              {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            xmlhttp.onreadystatechange=function()
+              {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    funct(xmlhttp.responseText);
+                }
+              }
+            xmlhttp.open("GET",urla,true);
+            xmlhttp.send();
+            }
+
+      function get_soal(urla)
+            {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+              {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+              }
+            else
+              {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            xmlhttp.onreadystatechange=function()
+              {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                document.getElementById("soal").innerHTML=xmlhttp.responseText;
+                if (jwb[no-1] !== "-"){
+                    document.getElementById(jwb[no-1]).checked=true;
+                    }
+                }
+              }
+            xmlhttp.open("GET",urla,true);
+            xmlhttp.send();
+            }
+
+    function get_soal1(urla) {
+        var scnt='',vupto='',ju=0, vab="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        document.getElementById("soal").innerHTML='<div><img src='+urla+'></div>';
+        scnt+='<div class="btn-group">';
+        if (nj[no-1] == "1"){
+          scnt+='<button class="btn btn-warning" onClick=func("A")>A</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("B")>B</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("C")>C</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("D")>D</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("E")>E</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+        }
+        if (nj[no-1] == "2"){
+          scnt+='<button class="btn btn-warning" onClick=func("B")>BENAR</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("S")>SALAH</button>';
+          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+        }
+        if (nj[no-1] == "3"){
+          vupto=nu[no-1];
+          ju=vupto.charCodeAt(0)-65;
+          for (i=0;i<=ju;i++){
+            scnt+='<button class="btn btn-warning" onClick=func("'+vab.substring(i,i+1)+'")>'+ vab.substring(i,i+1) +'</button>';
+          }
+          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+        }
+        scnt+='</div>';
+        document.getElementById("pilihan1").innerHTML=scnt;
+     }
+
+    function fback(){
+      var vno=0;
+      if (no>1){
+        no-=1;vno=no-1;
+        if (vkat == "1"){
+          get_soal1('/proset/'+ vid + '/' + kode + '/' + ns[vno] + '.png');
+        }else{
+          get_soal('/soal/'+kode+'/'+ns[vno]+'.html');
+        }
+        document.getElementById("o"+vno).selected = "true";
+        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+      }
+    }
+    function fnext(){
+      var vno=0;
+      if (no<jsoal){
+        no+=1;vno=no-1;
+        if (vkat == "1"){
+          get_soal1('/proset/'+ vid + '/' + kode + '/' + ns[vno] + '.png');
+        }else{
+          get_soal('/soal/'+kode+'/'+ns[vno]+'.html');
+        }
+        document.getElementById("o"+vno).selected = "true";
+        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+      }
+    }
+    function ganti_nomer(){
+        var vno=document.getElementById("sel_no").value;
+        no=parseInt(vno)+1;
+        if (vkat == "1"){
+          get_soal1('/proset/'+ vid + '/' + kode + '/' + ns[no-1] + '.png');
+        }else{
+          get_soal('/soal/'+kode+'/'+ns[no-1]+'.html');
+        }
+        document.getElementById("o"+vno).selected = "true";
+        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+    }
+    function habis_waktu() {
+        var vby='<button class="btn btn-warning" onClick="simpan()">KIRIM</button>';
+        var vbn='<a href="/"><button class="btn btn-warning">BATAL</button></a>';
+        taktif(true);
+        wDOM('pesan','<span class="bg-danger text-danger">Waktu Habis !</span><br><span class="bg-warning text-warning">Klik tombol KIRIM untuk mengirim jawaban ke server, atau BATAL jika tidak mau mengirim ke server!</span><br>');
+        wDOM('ya_button',vby);
+        wDOM('no_button',vbn);
+    }
+
+    function pewaktu(wkt){
+        var myTimeout = setTimeout(habis_waktu, (wkt*1000)+2000);
+        var myVar = setInterval(countdown, 1000);
+
+        function countdown(){
+            var jam=0,sjam=0,mnt=0,dtk=0;
+            var str_waktu="";
+            var swaktu='';
+            jam=Math.floor(jwaktu/3600);
+            sjam=jwaktu % 3600;
+            mnt=Math.floor(sjam/60);
+            dtk=sjam % 60;
+            str_waktu=jam+":"+mnt+":"+dtk;
+            wDOM('waktu',str_waktu);
+            jwaktu-=1;
+            if ((jwaktu % 60) == 0){
+                 save_ls();
+            }
+            if (jwaktu == -1){
+                clearInterval(myVar);
+            }
+        }
+    }
+
+    function taktif(bol){
+        document.getElementById("back_button").disabled=bol;
+        document.getElementById("next_button").disabled=bol;
+        document.getElementById("sls_button").disabled=bol;
+        document.getElementById("sel_no").disabled=bol;
+    }
+
+    function selesai(){
+        var vby='<button class="btn btn-success" onClick="simpan()">YA</button>';
+        var vbn='<button class="btn btn-success" onClick="batal()">TIDAK</button>';
+        taktif(true);
+        wDOM('pesan','<span class="bg-danger text-danger">Selesai mengerjakan Ujian ?  </span>');
+        wDOM('ya_button',vby);
+        wDOM('no_button',vbn);
+    }
+
+    function batal(){
+        taktif(false);
+        wDOM('pesan',"");
+        wDOM('ya_button',"");
+        wDOM('no_button',"");
+    }
+
+    function simpan(){
+        var jwsem=[];
+        for (i=0;i<jsoal;i++){
+            jwsem[ns[i]-1]=jwb[i];
+        }
+        var vjwb=jwsem.toString();
+        vjwb=vjwb.replace(/,/g, "");
+        if (vkat == "1"){
+          vurl="/simpan/"+kode+"/"+vjwb+"/"+vnis+"/"+vkat;
+        }else{
+          vurl="/simpan/"+kode+"/"+vjwb+"/"+vnis+"/"+vkat;
+        }
+        taktif(true);
+        wDOM('pesan','<span class="bg-warning text-warning"> Tunggu.... lagi memproses data ! </span>');
+        get_resp(vurl,res_pesan);
+        //wDOM('title',vjwb);
+    }
+
+    function res_pesan(data){
+        var vby='<a href="/home-logout"><button class="btn btn-success">Logout</button></a>';
+        var vbn='<a href="/"><button>Home</button></a>';
+        var vdata=JSON.parse(data);
+        if (vdata.nilai == null){
+           wDOM('pesan', '<span class="bg-danger text-danger">Gagal Simpan Data ! Coba lagi dengan menekan tombol Selesai </span>');
+           taktif(false);
+           wDOM('ya_button',"");
+           wDOM('no_button',"");
+        }else {
+           wDOM('pesan', '<span class="bg-success text-success"> Data telah disimpan di server. Nilai Ujian Kamu: '+vdata.nilai+ '   </span>');
+           wDOM('ya_button',vby);
+           wDOM('no_button','');
+           localStorage.clear();
+        }
+    }
+
+</script>
+<div class="container">
+
+
+<div class="panel panel-primary">
+   <div class="panel-heading">
+     <h6 class="text-center" id="title">
+       TO UNBK - Kode Soal:{{data.kodesoal}} - {{data.pelajaran}} - {{data.keterangan}}
+     </h6>
+  </div>
+  <div class="panel-body">
+    <h6 class="text-center">
+      Selamat Bekerja {{nama}}
+    </h6>
+  </div>
+</div>
+<div class="row">
+   <div class="col-sm-2">
+     <select class="form-control" id="sel_no" onchange="ganti_nomer()">
+               <script>
+                   for (i=0;i<jsoal;i++){
+                       document.write('<option id="o'+i+'" value='+i+'>'+(i+1)+' ('+jwb[i]+')</option>');
+                   }
+               </script>
+     </select>
+   </div>
+   <div class="col-sm-2">
+     <div class="panel panel-primary">
+       <div class="panel-body  text-center" id="xdarit">
+          1 dari {{data.jsoal}}
+       </div>
+     </div>
+  </div>
+  <div class="col-sm-2">
+     <div class="panel panel-primary">
+       <div class="panel-body text-center">
+         sisa waktu: <strong id="waktu"></strong>
+       </div>
+     </div>
+   </div>
+   <div class="col-sm-6"></div>
+</div>
+
+   <div id="soal"></div>
+   <div id="pilihan1"></div>
+   <div><h3 id="jawab"></h3></div>
+
+<div class="row">
+<script>
+    if (vkat == "1") {
+      get_soal1('/proset/'+ vid + '/' + kode + '/' + ns[0] + '.png');
+    } else {
+      get_soal('/soal/'+kode+'/'+ns[0]+'.html');
+    }
+    pewaktu(jwaktu);
+</script>
+</div>
+<div class="row">
+  <br/>
+  <div class="btn-group">
+  <button class="btn btn-primary" id="back_button" name="button_back" onClick="fback()">BACK</button>
+  <button class="btn btn-primary" id="next_button" name="button_next" onClick="fnext()">NEXT</button>
+  <button class="btn btn-primary" id="sls_button" onClick="selesai()">SELESAI</button>
+  </div>
+  <span id="pesan"></span><span id="ya_button"></span><span id="no_button"></span>
+</div>
+<div>
+  <h4 class="text-primary">
+    Jawaban:
+  </h4>
+</div>
+<div class="row">
+  <table border="1">
+    <tr>
+      <script>
+        for (i=1;i<=jsoal;i++){
+          document.write('<td>' + i + '</td>');
+        }
+      </script>
+    </tr>
+    <tr>
+      <script>
+        for (j=0;j<jsoal;j++){
+          document.write('<td id="jsn'+ j + '">' + jwb[j] + '</td>');
+        }
+      </script>
+    </tr>
+  </table>
+</div>
+
+</div>
+
+
+{% endblock %}

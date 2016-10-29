@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Soal TO</title>
+    <link rel="stylesheet" href="css/custom.css" />
+    <script>
+        function get_soal(urla)
+            {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+              {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+              }
+            else
+              {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            xmlhttp.onreadystatechange=function()
+              {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                document.getElementById("soal").innerHTML=xmlhttp.responseText;
+                }
+              }
+            xmlhttp.open("GET",urla,true);
+            xmlhttp.send();
+            }
+    </script>
+</head>
+
+<body>
+    <h>Soal Nomer: {{nomer}}</h>
+    <div id="soal"></div>
+    <script>
+       get_soal('/soal/'+'{{kode}}'+'/'+'{{nomer}}'+'.html');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICBL - Integrated Computer Based Learning</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.theme.css" rel="stylesheet">
+    <script src="jquery/jquery-1.12.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+{% block header %}
+{% if user %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">ICBL</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/home-modul">MODUL</a></li>
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">UJIAN<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/home-us">Ujian Sekolah</a></li>
+              <li><a href="/home-un">Ujian Nasional</a></li>
+              <li><a href="/home-sbmptn">SBMPTN</a></li>
+            </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/home-logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

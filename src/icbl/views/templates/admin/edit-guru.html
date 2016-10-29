@@ -1,0 +1,39 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+<form method="POST" action="/update-guru">
+    <table width="100%">
+    <tr>
+        <td><h3 align="center">Edit Data Guru</h3></td>
+    <tr>
+    <tr align="center">
+        <td style="padding-top:15px; padding-bottom:15px">
+        <table>
+            <tr>
+               <td height="30"><span class="style1">ID</span><br />
+                    <input type="text" value="{{datum.id}}" disabled />
+               </td>
+            </tr>
+            <tr>
+                <td height="30"><span class="style1">NAMA</span><br />
+                    <input type="text" name="nama" value="{{datum.nama}}" />
+               </td>
+            </tr>
+            <tr>
+                <td height="30"><span class="style1">Password</span><br />
+                    <input type="text" name="pass" value="{{datum.pass}}" />
+               </td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+    <tr>
+        <td height="40" align="center">
+            <input type="submit" style="width:200px; background-color:#CCFFFF" value="UPDATE DATA GURU!"/>
+         </td>
+    </tr>
+
+</table>
+<input type="hidden" name="id" value="{{datum.id}}">
+</form>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "icbl/views/templates/home/base.html" %}
+
+{% block content %}
+<script>
+        function kirim(kat){
+            document.pf.kodeto.value=document.getElementById('kodeto').value;
+            document.pf.kategori.value=kat;
+            document.getElementById("pf").submit();
+        }
+
+</script>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="text-center">
+      Selamat Datang {{nama}} ({{user}})
+    </h2>
+  </div>
+  <div class="panel-body">
+    <h3 class="text-center">
+      TRY-OUT UJIAN NASIONAL BERBASIS KOMPUTER
+    </h3>
+  </div>
+</div>
+<div class="row">
+  <div align="center">
+    <div class="text-default">
+      <strong>Masukkan kode ujian !</strong>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group">
+     <div class="col-sm-5"></div>
+     <div class="col-sm-2"><input type="text" class="form-control text-center" id="kodeto" value="{{kodeto}}"></div>
+     <div class="col-sm-5"></div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" align="center">
+          <button class="btn btn-success" onClick="kirim(2)">KIRIM</button>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+      <div align="center">
+        <span class="label label-danger">{{error}}</span>
+      </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<form method="POST" action="/home-kodeto" name="pf" id="pf">
+    <input type="hidden" name="kodeto">
+    <input type="hidden" name="kategori">
+</form>
+
+{% endblock %}

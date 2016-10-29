@@ -1,0 +1,96 @@
+body
+{
+	background: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+input
+{
+  size: 25;
+}
+
+h2
+{
+  color: #0000FF;
+}
+
+.bgblue
+{
+  background-color: blue;
+  width: 100%;
+}
+
+.left
+{
+  left: 0px;
+  margin-left: 5 px;
+}
+
+.right
+{
+  right: 0px;
+  margin-right: 5 px
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.style1 {
+	font-size: 0.8em;
+	color: #FF0000;
+	padding-left:2px;
+	}
+
+.style2 {
+	font-size: 1.4em;
+}
+
+.sibud{
+	height:45px;
+	margin-top:5px;
+	margin-bottom:5px;
+  width:15em;
+}
+
+.hidden {
+  display: none;
+}
+
+ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #777777;
+}
+
+li.cnav {
+    float: left;
+}
+
+li.cnav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li.cnav a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}

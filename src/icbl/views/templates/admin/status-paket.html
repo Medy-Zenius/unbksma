@@ -1,0 +1,23 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <h2 align="center">Status Paket</h2>
+    <h3 align="center">Klik kode untuk mengubah status!</h3>
+    <form method="POST" action="/ubah-status">
+    <table border="1" align="center">
+        <tr><td>Pelajaran</td><td>Paket</td><td>Soal</td><td>Waktu</td><td>Kode</td><td>Status</td></tr>
+        {% for datum in data %}
+        <tr>
+            <td>{{datum.pelajaran}}</td>
+            <td>{{datum.keterangan}}</td>
+            <td>{{datum.jsoal}}</td>
+            <td>{{datum.waktu}} mnt</td>
+            <td><input type="submit" name="kodesoal" value="{{datum.kodesoal}}" /></td>
+            <td>{{datum.status}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+
+{% endblock %}
+

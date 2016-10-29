@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO UNBK - Try Out Ujian Nasional Berbasis Komputer</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.theme.css" rel="stylesheet">
+    <script src="jquery/jquery-1.12.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+{% block header %}
+{% if user %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TO-UN</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="/admin-home">Home</a></li>
+        <li><a href="/status-paket">Status Paket</a></li>
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hasil TO<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/hasil-to">Kode Soal</a></li>
+              <li><a href="/rekap-ipa">Rekapitulasi IPA</a></li>
+              <li><a href="/rekap-ips">Rekapitulasi IPS</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Analisis Butir Soal<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/abs">Distribusi Benar-Salah-Kosong</a></li>
+              <li><a href="/abs-tk">Tingkat Kesulitan</a></li>
+              <li><a href="/abs-dp">Daya Pembeda</a></li>
+              <li><a href="/dayakecoh">Daya Kecoh</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Simpan ke Excel<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/hasil-to-excel">Hasil TO</a></li>
+              <li><a href="/rekap-ipa-excel">Rekapitulasi TO IPA</a></li>
+              <li><a href="/rekap-ips-excel">Rekapitulasi TO IPS</a></li>
+              <li><a href="#">Analisis butir soal</a></li>
+              <li><a href="/abs-excel"> - Distribusi B-S-K</a></li>
+              <li><a href="/abs-tk-excel"> - Tingkat Kesulitan</a></li>
+              <li><a href="/abs-dp-excel"> - Daya Pembeda</a></li>
+              <li><a href="/adk-excel"> - Daya kecoh</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Edit Data<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/edit-siswa">Lihat/Edit Data Siswa</a></li>
+              <li><a href="/ganti-pw-admin">Ganti PW Admin</a></li>
+            </ul>
+        </li>
+<!--         <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">GURU<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/lihat-guru">Lihat Guru</a></li>
+              <li><a href="/daftarkan-guru">Daftarkan Guru</a></li>
+            </ul>
+        </li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/admin-logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

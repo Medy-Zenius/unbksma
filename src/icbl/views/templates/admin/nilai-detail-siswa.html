@@ -1,0 +1,28 @@
+{% extends "icbl/views/templates/admin/base.html" %}
+
+{% block content %}
+    <script>
+        var vno=1;
+        var kun='{{kunci}}';
+        var jwb='{{jawaban}}';
+    </script>
+    <h2 align="center">HASIL TO</h2>
+    <h3 align="center">{{pelajaran}} - {{keterangan}} - kode {{kodesoal}} </h3>
+    <h3 align="center">Nama: {{data.nama}} - NIS: {{data.nis}} </h3>
+    <h3 align="center">Nilai: {{data.nilai}} - (Benar: {{benar}}, Salah: {{salah}}, Kosong: {{kosong}})</h3>
+    <form method="POST" action="/lihat-soal" target="_blank">
+    <table border="1" align="center">
+        <tr><td>No</td><td>Kunci</td><td>Jawaban</td></tr>
+        <script>
+            for (i=0;i<kun.length;i++){
+              document.write('<tr><td><input type="submit" name="nomer" value="'+ (i+1) +'"></td>');
+              document.write('<td>'+kun.substring(i,i+1)+'</td>');
+              document.write('<td>'+jwb.substring(i,i+1)+'</td></tr>');
+            }
+
+        </script>
+    </table>
+    <input
+    <input type="hidden" name="kode" value="{{kode}}" />
+    </form>
+{% endblock %}
