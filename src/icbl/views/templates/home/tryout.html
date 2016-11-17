@@ -1,4 +1,4 @@
-{% extends "icbl/views/templates/home/base.html" %}
+{% extends "icbl/views/templates/basesoal.html" %}
 
 {% block content %}
 
@@ -43,6 +43,16 @@
     } else {localStorage.kodesoal='{{data.kodesoal}}';};
     if (vkat == "1"){localStorage.id='{{data.id}}';} else {localStorage.id='1';};
 
+    function darkbg(){
+      if (document.getElementById("bg").className == "soal-background-dark"){
+        document.getElementById("bg").className = "";
+        document.getElementById("ans-table").setAttribute("style", "color:#000000");
+      } else {
+        document.getElementById("bg").className = "soal-background-dark";
+        document.getElementById("ans-table").setAttribute("style", "color:#ffffff");
+      }
+    }
+
     function save_ls(){
        localStorage.jwaktu=jwaktu;
        localStorage.jwb=JSON.stringify(jwb);
@@ -60,6 +70,13 @@
         wDOM("jsn"+vno,jw);
         jwb[vno]=jw;
         save_ls();
+
+        var ansl = 'ABCDES-';
+        for(i=0; i<ansl.length;i++){
+            document.getElementById('ans-' + ansl[i]).classList.remove('answered');
+            document.getElementById('ans-'+ jw).classList.add('answered');
+        }
+        
     }
 
     function get_resp(urla,funct)
@@ -114,25 +131,25 @@
         document.getElementById("soal").innerHTML='<div><img src='+urla+'></div>';
         scnt+='<div class="btn-group">';
         if (nj[no-1] == "1"){
-          scnt+='<button class="btn btn-warning" onClick=func("A")>A</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("B")>B</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("C")>C</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("D")>D</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("E")>E</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+          scnt+='<button id="ans-A" class="btn btn-lg btn-bluegreen-bordered" onClick=func("A")>A</button>';
+          scnt+='<button id="ans-B" class="btn btn-lg btn-bluegreen-bordered" onClick=func("B")>B</button>';
+          scnt+='<button id="ans-C" class="btn btn-lg btn-bluegreen-bordered" onClick=func("C")>C</button>';
+          scnt+='<button id="ans-D" class="btn btn-lg btn-bluegreen-bordered" onClick=func("D")>D</button>';
+          scnt+='<button id="ans-E" class="btn btn-lg btn-bluegreen-bordered" onClick=func("E")>E</button>';
+          scnt+='<button id="ans--" class="btn btn-lg btn-bluegreen-bordered" onClick=func("-")>-</button>';
         }
         if (nj[no-1] == "2"){
-          scnt+='<button class="btn btn-warning" onClick=func("B")>BENAR</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("S")>SALAH</button>';
-          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+          scnt+='<button id="ans-B" class="btn btn-lg btn-bluegreen-bordered" onClick=func("B")>BENAR</button>';
+          scnt+='<button id="ans-S" class="btn btn-lg btn-bluegreen-bordered" onClick=func("S")>SALAH</button>';
+          scnt+='<button id="ans--" class="btn btn-lg btn-bluegreen-bordered" onClick=func("-")>-</button>';
         }
         if (nj[no-1] == "3"){
           vupto=nu[no-1];
           ju=vupto.charCodeAt(0)-65;
           for (i=0;i<=ju;i++){
-            scnt+='<button class="btn btn-warning" onClick=func("'+vab.substring(i,i+1)+'")>'+ vab.substring(i,i+1) +'</button>';
+            scnt+='<button id="ans-'+ vab.substring(i,i+1) +'" class="btn btn-lg btn-bluegreen-bordered" onClick=func("'+vab.substring(i,i+1)+'")>'+ vab.substring(i,i+1) +'</button>';
           }
-          scnt+='<button class="btn btn-warning" onClick=func("-")>-</button>';
+          scnt+='<button id="ans--" class="btn btn-lg btn-bluegreen-bordered" onClick=func("-")>-</button>';
         }
         scnt+='</div>';
         document.getElementById("pilihan1").innerHTML=scnt;
@@ -147,8 +164,19 @@
         }else{
           get_soal('/soal/'+kode+'/'+ns[vno]+'.html');
         }
-        document.getElementById("o"+vno).selected = "true";
-        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+
+        for (i=1;i<=jsoal;i++){
+          document.getElementById("n"+i).classList = "n-inactive"
+        }
+        var td = document.getElementById("n" + no);
+        td.classList = "n-active";
+
+        var ansl = 'ABCDES-';
+
+        for(i=0; i<ansl.length;i++){
+            document.getElementById('ans-' + ansl[i]).classList.remove('answered');
+            document.getElementById('ans-'+ jwb[no-1]).classList.add('answered');
+        }
       }
     }
     function fnext(){
@@ -160,23 +188,73 @@
         }else{
           get_soal('/soal/'+kode+'/'+ns[vno]+'.html');
         }
-        document.getElementById("o"+vno).selected = "true";
-        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+
+        for (i=1;i<=jsoal;i++){
+          document.getElementById("n"+i).classList = "n-inactive"
+        }
+        var td = document.getElementById("n" + no);
+        td.classList = "n-active";
+
+        var ansl = 'ABCDES-';
+
+        for(i=0; i<ansl.length;i++){
+            document.getElementById('ans-' + ansl[i]).classList.remove('answered');
+            document.getElementById('ans-'+ jwb[no-1]).classList.add('answered');
+        }
       }
     }
-    function ganti_nomer(){
-        var vno=document.getElementById("sel_no").value;
-        no=parseInt(vno)+1;
+    function ganti_nomer(ano){
+        no=ano;
         if (vkat == "1"){
           get_soal1('/proset/'+ '{{data.id}}' + '/' + {{data.kode}} + '/' + ns[no-1] + '.png');
         }else{
           get_soal('/soal/'+kode+'/'+ns[no-1]+'.html');
         }
-        document.getElementById("o"+vno).selected = "true";
-        document.getElementById("xdarit").innerHTML = no+" dari "+jsoal;
+
+        for (i=1;i<=jsoal;i++){
+          document.getElementById("n"+i).classList = "n-inactive"
+        }
+        var td = document.getElementById("n" + no);
+        td.classList = "n-active";
+
+        var ansl = 'ABCDES-';
+
+        for(i=0; i<ansl.length;i++){
+            document.getElementById('ans-' + ansl[i]).classList.remove('answered');
+            document.getElementById('ans-'+ jwb[no-1]).classList.add('answered');
+        }
     }
+
+    function countercol (n, skala) {
+      nscale = n/skala *100;
+      if (0 <= nscale && nscale < 80){
+        document.getElementById('snilaim').classList='s-bronze';
+      } else if (80 <= nscale && nscale < 90) {
+        document.getElementById('snilaim').classList='s-silver';
+      } else if (90 <= nscale && nscale <= 100){
+        document.getElementById('snilaim').classList='s-gold';
+      }
+    }
+
+    function counter (nval, n){
+      var val = 0;
+      var elem = document.getElementById('snilaim');
+      var reptr = setInterval(counterf, 1800/n);
+      function counterf (){
+        if (val >= nval){
+          clearInterval(reptr);
+          elem.innerHTML = nval;
+          countercol(nval, n);
+        } else {
+          elem.innerHTML = val;
+          val++;
+          countercol(val, n);
+        }
+      }
+    }
+
     function habis_waktu() {
-        var vby='<button class="btn btn-warning" onClick="simpan()">KIRIM</button>';
+        var vby='<button class="btn btn-warning" data-toggle="modal" data-target=".bs-example-modal-sm" onClick="simpan()">KIRIM</button>';
         var vbn='<a href="/"><button class="btn btn-warning">BATAL</button></a>';
         taktif(true);
         wDOM('pesan','<span class="bg-danger text-danger">Waktu Habis !</span><br><span class="bg-warning text-warning">Klik tombol KIRIM untuk mengirim jawaban ke server, atau BATAL jika tidak mau mengirim ke server!</span><br>');
@@ -217,10 +295,10 @@
     }
 
     function selesai(){
-        var vby='<button class="btn btn-success" onClick="simpan()">YA</button>';
+        var vby='<button class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm" onClick="simpan()">YA</button>';
         var vbn='<button class="btn btn-success" onClick="batal()">TIDAK</button>';
         taktif(true);
-        wDOM('pesan','<span class="bg-danger text-danger">Selesai mengerjakan Ujian ?  </span>');
+        wDOM('pesan','<span class="bg-danger text-danger">Yakin selesai mengerjakan Ujian ?  </span>');
         wDOM('ya_button',vby);
         wDOM('no_button',vbn);
     }
@@ -261,7 +339,40 @@
            wDOM('ya_button',"");
            wDOM('no_button',"");
         }else {
-           wDOM('pesan', '<span class="bg-success text-success"> Data telah disimpan di server.</span>');
+           var snilai = vdata.nilai/vdata.skala * 100;
+
+           wDOM('pesan', '<span class="bg-success text-success"> Data telah disimpan di server. Nilai Ujian Kamu: <b id="snilai">'+vdata.nilai+'</b>   </span>');
+           var nres = '<div><b id="snilaim">' + vdata.nilai+"</b></div>";
+           document.getElementById("mod-content").innerHTML = nres;
+           counter(vdata.nilai, vdata.skala);
+
+           if (snilai < 30){
+              document.getElementById('snilai').classList='s-bronze';
+              document.getElementById('bronze1').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-fill-mode: forwards;');
+           } else if (snilai < 60){
+              document.getElementById('snilai').classList='s-bronze';
+              document.getElementById('bronze1').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-fill-mode: forwards;');
+              document.getElementById('bronze2').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 0.5s; animation-fill-mode: forwards;');
+           } else if (snilai < 80){
+              document.getElementById('snilai').classList='s-bronze';
+              document.getElementById('bronze1').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-fill-mode: forwards;');
+              document.getElementById('bronze2').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 0.5s; animation-fill-mode: forwards;');
+              document.getElementById('bronze3').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 1s; animation-fill-mode: forwards;');
+           } else if (snilai < 90){
+              document.getElementById('snilai').classList='s-silver';
+              document.getElementById('bronze1').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-fill-mode: forwards;');
+              document.getElementById('bronze2').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 0.5s; animation-fill-mode: forwards;');
+              document.getElementById('bronze3').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 1s; animation-fill-mode: forwards;');
+              document.getElementById('silver').setAttribute('style','animation-name: star-ex; animation-duration: 0.6s; animation-delay: 1.6s; animation-fill-mode: forwards;');
+           } else if (snilai <= 100){
+              document.getElementById('snilai').classList='s-gold';
+              document.getElementById('bronze1').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-fill-mode: forwards;');
+              document.getElementById('bronze2').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 0.5s; animation-fill-mode: forwards;');
+              document.getElementById('bronze3').setAttribute('style','animation-name: star-op; animation-duration: 1s; animation-delay: 1s; animation-fill-mode: forwards;');
+              document.getElementById('silver').setAttribute('style','animation-name: star-ex; animation-duration: 0.6s; animation-delay: 1.6s; animation-fill-mode: forwards;');
+              document.getElementById('gold').setAttribute('style','animation-name: star-ex2; animation-duration: 0.6s; animation-delay: 2.1s; animation-fill-mode: forwards;');
+           }
+
            wDOM('ya_button',vby);
            wDOM('no_button','');
            localStorage.clear();
@@ -272,47 +383,86 @@
 <div class="container">
 
 
-<div class="panel panel-primary">
+<div class="panel panel-bluegreen bordered">
    <div class="panel-heading">
-     <h6 class="text-center" id="title">
-       TO UNBK - Kode Soal:{{data.kodesoal}} - {{data.pelajaran}} - {{data.keterangan}}
-     </h6>
-  </div>
-  <div class="panel-body">
-    <h6 class="text-center">
-      Selamat Bekerja {{nama}}
-    </h6>
+     <h1 class="text-center" id="title">
+       UNBK - Kode Soal:{{data.kodesoal}} - {{data.pelajaran}} - {{data.keterangan}}
+     </h1>
   </div>
 </div>
 <div class="row">
-   <div class="col-sm-2">
-     <select class="form-control" id="sel_no" onchange="ganti_nomer()">
-               <script>
-                   for (i=0;i<jsoal;i++){
-                       document.write('<option id="o'+i+'" value='+i+'>'+(i+1)+' ('+jwb[i]+')</option>');
-                   }
-               </script>
-     </select>
-   </div>
-   <div class="col-sm-2">
-     <div class="panel panel-primary">
-       <div class="panel-body  text-center" id="xdarit">
-          1 dari {{data.jsoal}}
-       </div>
-     </div>
+  <div class="panel panel-primary timer-panel">
+    <div class="panel-body text-center">
+      Sisa Waktu: <strong id="waktu"></strong>
+    </div>
   </div>
-  <div class="col-sm-2">
-     <div class="panel panel-primary">
-       <div class="panel-body text-center">
-         sisa waktu: <strong id="waktu"></strong>
-       </div>
-     </div>
-   </div>
-   <div class="col-sm-6"></div>
 </div>
+<div class="row">
+  <div class="col-sm-12 nm">
+    <b class="pull-right">Nightmode</b>
+    <input type="checkbox" class="pull-right" name="" value="" onclick="darkbg()">
 
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="select-table">
+    
+    <select class="form-control form-tracker pull-left" id="sel_no" onchange="ganti_nomer()">
+      <script>
+      for (i=0;i<jsoal;i++){
+      document.write('<option id="o'+i+'" value='+i+'>'+(i+1)+' ('+jwb[i]+')</option>');
+      }
+      </script>
+    </select>
+      
+    <br>
+    </div>
+<div class="row">
+  <div class="col-sm-12">
+    <a href ="#" class="arrow-left pull-left" onClick="fback()"></a>
+    <table id="ans-table" class="answer-table pull-left">
+        <script>
+        var tbrow = Math.ceil(jsoal/30);
+        var rlimit = 30;
+        function hrem (x, y){
+          if((x-y)>=0){
+            return x-y;
+          } else {
+            return 0;
+          }
+        }
+        for (j=0; j<tbrow;j++){
+          for(i=1+(j*rlimit);i<=jsoal-hrem(jsoal, (j+1)*rlimit);i++){
+            document.write('<td id="n' + i+ '"><a href="#ans-table" onclick="ganti_nomer('+ i +')">' + i + '</a></td>');
+          }
+          document.write('<tr id="r'+j+'"></tr>');
+          for(k=1+(j*rlimit);k<=jsoal-hrem(jsoal, (j+1)*rlimit);k++){
+            document.getElementById('r'+(Math.ceil(k/rlimit)-1)).innerHTML += '<td id="jsn'+ (k-1) + '">' + jwb[k-1] + '</td>';
+          }
+          document.getElementById("n1").className = "n-active";
+        }
+        </script>
+    </table>
+    <a href ="#" class="arrow-right pull-left" onClick="fnext()"></a>
+  </div>
+  
+</div> 
+  </div>
+</div>
+  <br>
    <div id="soal"></div>
-   <div id="pilihan1"></div>
+   <div class="row">
+     <div class="col-sm-12">
+       <div id="pilihan1" class="pull-left"></div>
+       <div class="btn-group pull-left nextback">
+        <button class="btn btn-bluegreen-bordered" id="back_button" name="button_back" onClick="fback()">BACK</button>
+        <button class="btn btn-bluegreen-bordered" id="next_button" name="button_next" onClick="fnext()">NEXT</button>
+      </div>
+     </div>
+
+   </div>
    <div><h3 id="jawab"></h3></div>
 
 <div class="row">
@@ -325,40 +475,38 @@
     pewaktu(jwaktu);
 </script>
 </div>
+<br>
 <div class="row">
-  <br/>
-  <div class="btn-group">
-  <button class="btn btn-primary" id="back_button" name="button_back" onClick="fback()">BACK</button>
-  <button class="btn btn-primary" id="next_button" name="button_next" onClick="fnext()">NEXT</button>
-  <button class="btn btn-primary" id="sls_button" onClick="selesai()">SELESAI</button>
+  <div class="col-sm-12">
+    <button class="btn btn-lg btn-brightgreen" id="sls_button" onClick="selesai()">SELESAI</button>
   </div>
-  <span id="pesan"></span><span id="ya_button"></span><span id="no_button"></span>
-</div>
-<div>
-  <h4 class="text-primary">
-    Jawaban:
-  </h4>
-</div>
-<div class="row">
-  <table border="1">
-    <tr>
-      <script>
-        for (i=1;i<=jsoal;i++){
-          document.write('<td>' + i + '</td>');
-        }
-      </script>
-    </tr>
-    <tr>
-      <script>
-        for (j=0;j<jsoal;j++){
-          document.write('<td id="jsn'+ j + '">' + jwb[j] + '</td>');
-        }
-      </script>
-    </tr>
-  </table>
-</div>
+  <div class="col-sm-12">
+    <span id="pesan"></span><span id="ya_button"></span><span id="no_button"></span>
+  </div>
 
+</div>
+<br>
+<br>
 
+</div>
+<!--MODAL-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <i id="bronze1" class="fa fa-star fa-lg s-bronze" aria-hidden="true"></i>
+        <i id="bronze2" class="fa fa-star fa-lg s-bronze" aria-hidden="true"></i>
+        <i id="bronze3" class="fa fa-star fa-2x s-bronze" aria-hidden="true"></i>
+        <i id="silver" class="fa fa-star fa-3x s-silver" aria-hidden="true"></i>
+        <i id="gold" class="fa fa-star fa-4x s-gold" aria-hidden="true"></i>
+        <br>
+        <div id="mod-content"></div> 
+        <br>
+        <a href="/home-logout"><button class="btn btn-success">Logout</button></a>
+      </div>
+      
+    </div>
+  </div>
 </div>
 {% endblock %}
-

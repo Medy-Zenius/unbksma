@@ -1,0 +1,211 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ujian Sekolah Berbasis Komputer</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.theme.css" rel="stylesheet">
+    <script src="jquery/jquery-1.12.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+<body class="guru-background">
+{% block header %}
+{% if user %}
+{% if status = 2 %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">GURU</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="/teacher-home">Home</a></li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hasil Tes<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/teacher-hasil-testL">SET SOAL SENDIRI</a></li>
+              <li><a href="/teacher-hasil-testB">BANK SET SOAL</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Analisis Butir Soal<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">SET SOAL SENDIRI</a></li>
+              <li><a href="/teacher-absL"> - Distribusi Benar-Salah-Kosong</a></li>
+              <li><a href="/teacher-abs-tkL"> - Tingkat Kesulitan</a></li>
+              <li><a href="/teacher-abs-dpL"> - Daya Pembeda</a></li>
+              <li><a href="/teacher-dayakecohL"> - Daya Kecoh</a></li>
+              <li><a href="#">BANK SET SOAL</a></li>
+              <li><a href="/teacher-absB"> - Distribusi Benar-Salah-Kosong</a></li>
+              <li><a href="/teacher-abs-tkB"> - Tingkat Kesulitan</a></li>
+              <li><a href="/teacher-abs-dpB"> - Daya Pembeda</a></li>
+              <li><a href="/teacher-dayakecohB"> - Daya Kecoh</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Simpan ke Excel<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">SET SOAL SENDIRI</a></li>
+              <li><a href="/teacher-hasil-test-excelL"> - Hasil Test</a></li>
+              <li><a href="#"> - Analisis butir soal</a></li>
+              <li><a href="/teacher-abs-excelL"> -- Distribusi B-S-K</a></li>
+              <li><a href="/teacher-abs-tk-excelL"> -- Tingkat Kesulitan</a></li>
+              <li><a href="/teacher-abs-dp-excelL"> -- Daya Pembeda</a></li>
+              <li><a href="/teacher-adk-excelL"> -- Daya kecoh</a></li>
+              <li><a href="#">BANK SET SOAL</a></li>
+              <li><a href="/teacher-hasil-test-excelB"> - Hasil Test</a></li>
+              <li><a href="#"> - Analisis butir soal</a></li>
+              <li><a href="/teacher-abs-excelB"> -- Distribusi B-S-K</a></li>
+              <li><a href="/teacher-abs-tk-excelB"> -- Tingkat Kesulitan</a></li>
+              <li><a href="/teacher-abs-dp-excelB"> -- Daya Pembeda</a></li>
+              <li><a href="/teacher-adk-excelB"> -- Daya kecoh</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">SET SOAL<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/teacher-buat-proset">Daftarkan Set Soal</a></li>
+              <li><a href="/teacher-upload-file">Upload File</a></li>
+              <li><a href="/teacher-edit-kunci">Buat/Edit Kunci</a></li>
+              <li><a href="/teacher-lihat-proset">Edit Set Soal</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/teacher-lihat-soal">Lihat Soal Satu per Satu</a></li>
+              <li><a href="/teacher-lihat-sekaligus">Lihat Soal Sekaligus</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/teacher-hapus-set">HAPUS SET SOAL!</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">BANK SET SOAL<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/teacher-lihat-bp">LIHAT BANK SET SOAL</a></li>
+              <li><a href="/teacher-lihat-catatan-bp">LIHAT CATATAN BUKU</a></li>
+              <li><a href="/teacher-catat-bp">CATAT DI BUKU</a></li>
+              <li><a href="/teacher-hapus-bp">HAPUS SET SOAL DARI BUKU</a></li>
+            </ul>
+        </li>
+        <!--
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">REKAP<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/teacher-rekap-test">BUAT REKAP TEST</a></li>
+              <li><a href="/teacher-edit-rekap">Lihat/Edit REKAP TEST</a></li>
+              <li><a href="/teacher-hasil-rekap">HASIL REKAP</a></li>
+            </ul>
+        </li>
+        -->
+        <li><a href="/teacher-ganti-pw">Ganti password</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/teacher-logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+    </div>
+</nav>
+{% endif %}
+
+{% if status = 1 %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">ADMIN</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="/admin-home">Home</a></li>
+        <li><a href="/admin-set-ip">IP</a></li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hasil Tes<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/admin-hasil-testB">BANK SET SOAL</a></li>
+              <li><a href="/admin-hasil-testL">SET SOAL GURU</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Analisis Butir Soal<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">BANK SET SOAL</a></li>
+              <li><a href="/admin-absB"> - Distribusi Benar-Salah-Kosong</a></li>
+              <li><a href="/admin-abs-tkB"> - Tingkat Kesulitan</a></li>
+              <li><a href="/admin-abs-dpB"> - Daya Pembeda</a></li>
+              <li><a href="/admin-dayakecohB"> - Daya Kecoh</a></li>
+              <li><a href="#">SET SOAL GURU</a></li>
+              <li><a href="/admin-abs"> - Distribusi Benar-Salah-Kosong</a></li>
+              <li><a href="/admin-abs-tk"> - Tingkat Kesulitan</a></li>
+              <li><a href="/admin-abs-dp"> - Daya Pembeda</a></li>
+              <li><a href="/admin-dayakecoh"> - Daya Kecoh</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Simpan ke Excel<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">BANK SET SOAL</a></li>
+              <li><a href="/admin-hasil-test-excelB">- Hasil Test</a></li>
+              <li><a href="#">- Analisis butir soal</a></li>
+              <li><a href="/admin-abs-excelB"> -- Distribusi B-S-K</a></li>
+              <li><a href="/admin-abs-tk-excelB"> -- Tingkat Kesulitan</a></li>
+              <li><a href="/admin-abs-dp-excelB"> -- Daya Pembeda</a></li>
+              <li><a href="/admin-adk-excelB"> -- Daya kecoh</a></li>
+              <li><a href="#">SET SOAL GURU</a></li>
+              <li><a href="/admin-hasil-test-excel">- Hasil Test</a></li>
+              <li><a href="#">- Analisis butir soal</a></li>
+              <li><a href="/admin-abs-excel"> -- Distribusi B-S-K</a></li>
+              <li><a href="/admin-abs-tk-excel"> -- Tingkat Kesulitan</a></li>
+              <li><a href="/admin-abs-dp-excel"> -- Daya Pembeda</a></li>
+              <li><a href="/admin-adk-excel"> -- Daya kecoh</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Edit Data<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/edit-siswa">Lihat/Edit Data Siswa</a></li>
+              <li><a href="#">Kelas</a></li>
+              <li><a href="/admin-edit-kelas">- Edit Kelas</a></li>
+              <li><a href="/admin-tambah-kelas">- Tambah Kelas</a></li>
+              <li><a href="#">Pelajaran</a></li>
+              <li><a href="/admin-edit-pelajaran">- Edit Pelajaran</a></li>
+              <li><a href="/admin-tambah-pelajaran">- Tambah Pelajaran</a></li>
+              <li><a href="/ganti-pw-admin">Ganti PW Admin</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">GURU<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/lihat-guru">Lihat Guru</a></li>
+              <li><a href="/daftarkan-guru">Daftarkan Guru</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">BankProset<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/admin-buat-proset">Daftarkan Set Soal</a></li>
+              <li><a href="/admin-search-proset">Lihat/Edit Set Soal</a></li>
+              <li><a href="/admin-upload-file">Upload File</a></li>
+              <li><a href="/admin-edit-kunci">Buat/Edit Kunci</a></li>
+              <li><a href="/admin-lihat-soal">Lihat Soal per soal</a></li>
+              <li><a href="/admin-lihat-sekaligus">Lihat Soal Sekaligus</a></li>
+              <li><a href="/admin-hapus-set">HAPUS SET SOAL!</a></li>
+            </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/admin-logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

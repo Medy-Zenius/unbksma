@@ -1,10 +1,11 @@
-{% extends "icbl/views/templates/home/base.html" %}
+{% extends "icbl/views/templates/basebg.html" %}
 
 {% block content %}
 
     <script>
         var vkode=localStorage.kodesoal;
         function kirim(vpf){
+            document.pf.kode.value=vkode;
             document.getElementById(vpf).submit();
         }
         function kirim1(vpf){
@@ -12,21 +13,25 @@
             document.getElementById(vpf).submit();
         }
     </script>
-<div class="alert alert-warning">
-  <h4 class="text-center">
-  <strong>Peringatan!</strong> Ada ujian dengan kode <strong><script>document.write(vkode)</script></strong> yang belum selesai!
-   </h4>
-</div>
-<div class="row">
-  <div class="col-sm-4"></div>
-  <div class="col-sm-4" align="center">
+
+<div class="row lstore-alert">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="alert alert-warning">
+      <h4 class="text-center">
+      <strong>Peringatan!</strong> Ada ujian dengan kode <strong><script>document.write(vkode)</script></strong> yang belum selesai anda kerjakan!
+      </h4>
+      <div align="center">
           <button class="btn btn-success btn-lg" onClick="kirim('pf')">Lanjutkan</button>
           <br><br>
-          <button class="btn btn-danger btn-lg" onClick="kirim('pf1')">Abaikan</button>
+          <button class="btn btn-danger btn-lg" onClick="kirim1('pf1')">Abaikan</button>
+      </div>
+    </div>
   </div>
-  <div class="col-sm-4"></div>
 </div>
 
-<form method="POST" action="/home-tryout-lanjutan" name="pf" id="pf"></form>
+<form method="POST" action="/home-tryout-lanjutan" name="pf" id="pf">
+  <input type="hidden" name="kode" id="kode">
+</form>
 <form method="POST" action="/home-tryout-baru" name="pf1" id="pf1"></form>
 {% endblock %}

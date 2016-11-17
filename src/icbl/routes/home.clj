@@ -82,10 +82,10 @@
                                        :jawaban jawaban
                                        :nilai nilai
                                        :tanggal (java.sql.Timestamp. (.getTime (java.util.Date.)))})
-              {:nilai nilai}
+              {:nilai nilai, :skala 100}
                ;{:nilai nil}
               (catch Exception ex
-                {:nilai nil}))
+                {:nilai nil, :skala 100}))
              (try (db/update-data-1 tbl
                                     ["nis=? AND kode=?" nis vkd]
                                       {:nis nis
@@ -93,9 +93,9 @@
                                        :jawaban jawaban
                                        :nilai nilai
                                        :tanggal (java.sql.Timestamp. (.getTime (java.util.Date.)))})
-               {:nilai nilai}
+               {:nilai nilai, :skala 100}
                (catch Exception ex
-                {:nilai nil}))
+                {:nilai nil, :skala 100}))
            )))
 
 (defn home-login []

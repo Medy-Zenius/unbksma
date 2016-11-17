@@ -1,0 +1,245 @@
+/*ANIMATION*/
+@keyframes star-op {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes star-ex {
+	from {font-size:0;}
+	to{font-size:38px;}
+}
+
+@keyframes star-ex2 {
+	from {font-size:0;}
+	to{font-size:48px;}
+}
+/*ANIMATION end*/
+
+#snilaim {
+	font-size:57px;
+}
+
+.login-background {
+	background-image: url("../img/bigstock--130810589.jpg");
+	background-size:cover;
+}
+
+.soal-background-dark {
+	background-color: #333;
+}
+
+.guru-background {
+	background-image: url("../img/teacher.jpg");
+	background-size: cover;
+}
+
+.nm b{
+	margin-top:3px;
+}
+
+.middle-absolute {
+	margin: auto;
+    position:absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.middle {
+	margin-left:auto !important; 
+	margin-right:auto !important;
+}
+
+.timer-panel {
+	margin-left:auto;
+	margin-right:auto;
+	width: 200px;
+	color:#000;
+}
+
+.h-middle {
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.form-tracker {
+	width:76px;
+}
+
+.panel-login {
+	width: 350px;
+    height: 375px;
+}
+
+.panel-registrasi {
+	width: 500px;
+	height:400px;
+}
+
+.panel-kodesoal{
+	width:300px;
+}
+
+.text-center {
+	text-align: center;	
+}
+
+.bordered {
+	border:1px solid #000;
+}
+
+.btn-bluegreen, .btn-bluegreen:hover {
+	background-color: #42f4d7;
+	color:#000000;
+}
+
+.btn-brightgreen, .btn-brightgreen:hover {
+	background-color: #00ff61;
+	color:#fff;
+}
+
+.btn-bluegreen-bordered, .btn-bluegreen-bordered:hover {
+	background-color: #42f4d7;
+	color:#000000;
+	border:1px solid #333;
+}
+
+.panel-bluegreen{
+	background-color: #42f4d7;
+	color:#000;
+}
+
+.label-middle > * {
+	height:34px;
+	line-height: 34px;
+}
+
+#sel_no {
+	display:none;
+}
+
+#ans-table {
+	border-radius: 25px;
+}
+
+#ans-table a{
+	display:block;
+	color:inherit;
+}
+
+#ans-table tr td{
+	border:1px solid #337ab7;
+	width:30px;
+	height:30px;
+	text-align: center;
+	color:inherit;
+}
+
+.modal-body {
+	text-align: center;
+}
+
+.n-active {
+	background-color: #42f4d7;
+}
+
+.nextback {
+	margin-left:10px;
+	margin-top:6px;
+}
+
+.select-table .arrow-left, .select-table .arrow-right{
+	margin-top:3px;
+}
+
+.select-table .arrow-left {
+	margin-right:3px;
+}
+
+.select-table .arrow-right{
+	margin-left:3px;
+}
+
+.
+
+/*ARROW*/
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  
+  border-bottom: 14px solid #42f4d7;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  
+  border-top: 14px solid #42f4d7;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  
+  border-left: 14px solid #42f4d7;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent; 
+  
+  border-right:14px solid #42f4d7; 
+}
+/*ARROWS ENDS*/
+
+.arrow-right{
+	margin-left:5px;
+}
+
+.arrow-left {
+	margin-right:5px;
+}
+#ans--{
+	background-color: #42f4d7 !important;
+}
+
+.answered, .answered:hover{
+	background-color:#6d6d6a;
+	color:#333;
+}
+
+/*STARS COLORS*/
+.s-bronze {
+	color:#0c8cfc;
+}
+
+.s-silver {
+	color:#b80cfc;
+}
+
+.s-gold {
+	color:#FFDF00;
+}
+
+/*STARS ANIMATE*/
+#bronze1, #bronze2, #bronze3 {
+	opacity: 0;
+}
+
+#silver, #gold {
+	font-size:0px;
+}
+
+/*MEDIA QUERY*/
+
+@media (min-width: 768px) {
+    .lstore-alert {
+		margin-top:200px;
+	}
+}

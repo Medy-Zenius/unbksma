@@ -1,35 +1,41 @@
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TO UNBK - Try Out Ujian Nasional Berbasis Komputer</title>
+    <title>UNBK - Ujian Sekolah Berbasis Komputer</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="css/bootstrap.theme.css" rel="stylesheet"> -->
     <link href="css/signin.css" rel="stylesheet">
     <!-- <script src="jquery/jquery-1.12.2.min.js"></script> -->
     <script src="js/bootstrap.min.js"></script>
-</head>
-<body>
-  <div class="container">
-      <div class="row" align="center">
-        <h2>
-          Selamat Datang Peserta TO-UNBK SMA
-        </h2>
-      </div>
-      <form class="form-signin" action="/home-login" method="POST">
-        <h2 class="form-signin-heading">Silakan Login</h2>
-        <label for="inputEmail" class="sr-only">ID Pengguna</label>
-        <input type="text" name="nis" value="{{nis}}" class="form-control" placeholder="ID Pengguna" required autofocus>
-        <label for="inputPassword" class="sr-only">Kata Sandi</label>
-        <input type="password" name="pass" class="form-control" placeholder="Kata Sandi" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        <span class="label label-danger">{{error}}</span>
-      </form>
-      <br>
-      <div class="row" align="center">
-        <a href="/registrasi-siswa" class="text-center text-primary">Siswa belum registrasi?</a>
-      </div>
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+  </head>
+  <body class="login-background">
+    <div class="container">
+      <div class="row">
 
-    </div> <!-- /container -->
-</body>
-</html>
+          <div class="panel panel-default panel-login middle-absolute">
+          <div class="col-xs-12">
+            <div class="panel-body">
+              
+              <form class="form-signin" action="/home-login" method="POST">
+                <h2 class="form-signin-heading text-center">Login</h2>
+                <label for="inputEmail" class="sr-only">ID Pengguna</label>
+                <input type="text" name="nis" value="{{nis}}" class="form-control" placeholder="ID Pengguna" required autofocus>
+                <label for="inputPassword" class="sr-only">Kata Sandi</label>
+                <input type="password" name="pass" class="form-control" placeholder="Kata Sandi" required>
+                <button class="btn btn-lg btn-bluegreen btn-block" type="submit">Login</button>
+                <span class="label label-danger">{{error}}</span>
+              </form>
+            </div>
+          </div>
+          <br>
+          <div class="row" align="center">
+            <b><div>Siswa belum registrasi?</div></b>
+            <a href="/registrasi-siswa" class="text-center btn btn-md btn-bluegreen">Registrasi</a>
+          </div>
+        </div>
+      </div>
+      </div> <!-- /container -->
+    </body>
+  </html>
