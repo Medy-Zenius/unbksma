@@ -15,6 +15,13 @@
 }
 /*ANIMATION end*/
 
+.ads-bin, .ads-bsd {
+	background-color: #fff;
+	padding:5px;
+	border-radius: 12px;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
 #snilaim {
 	font-size:57px;
 }
@@ -241,5 +248,11 @@
 @media (min-width: 768px) {
     .lstore-alert {
 		margin-top:200px;
+	}
+}
+
+@media (max-width:320px){
+	.ads-bin {
+	margin-top:400px;
 	}
 }
