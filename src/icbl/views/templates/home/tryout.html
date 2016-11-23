@@ -341,10 +341,10 @@
         }else {
            var snilai = vdata.nilai/vdata.skala * 100;
 
-           wDOM('pesan', '<span class="bg-success text-success"> Data telah disimpan di server. Nilai Ujian Kamu: <b id="snilai">'+vdata.nilai+'</b>   </span>');
-           var nres = '<div><b id="snilaim">' + vdata.nilai+"</b></div>";
+           wDOM('pesan', '<span class="bg-success text-success"> Hasil Ujian anda telah tersimpan.</span>');
+           var nres = '<div>Hasil Ujian anda telah tersimpan.</div>';
            document.getElementById("mod-content").innerHTML = nres;
-           counter(vdata.nilai, vdata.skala);
+           /*counter(vdata.nilai, vdata.skala);
 
            if (snilai < 30){
               document.getElementById('snilai').classList='s-bronze';
@@ -372,7 +372,7 @@
               document.getElementById('silver').setAttribute('style','animation-name: star-ex; animation-duration: 0.6s; animation-delay: 1.6s; animation-fill-mode: forwards;');
               document.getElementById('gold').setAttribute('style','animation-name: star-ex2; animation-duration: 0.6s; animation-delay: 2.1s; animation-fill-mode: forwards;');
            }
-
+          */
            wDOM('ya_button',vby);
            wDOM('no_button','');
            localStorage.clear();
